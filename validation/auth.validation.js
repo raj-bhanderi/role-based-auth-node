@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require("joi").extend(require('@joi/date'));
 const { validateSchema } = require("../helper");
 
 const email = { email: Joi.string().email().required() };
@@ -11,7 +11,7 @@ const signUp = Joi.object({
   first_name: Joi.string().alphanum().min(3).max(30).required(),
   last_name: Joi.string().alphanum().min(3).max(30).required(),
   profile_image: Joi.string().required(),
-  date_of_birth: Joi.string().required(),
+  date_of_birth: Joi.date().format('YYYY-MM-DD').required(),
   ...email,
   ...password,
 });
